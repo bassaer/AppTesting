@@ -2,6 +2,7 @@ package com.github.bassaer.apptesting;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    @VisibleForTesting
+    public static final String TOAST_MESSAGE = "Message was tapped!";
     private InputMethodManager mInputMethodManager;
     private ListView mListView;
 
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item item = items.get(position);
-                Toast.makeText(MainActivity.this, item.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, TOAST_MESSAGE, Toast.LENGTH_SHORT).show();
             }
         });
 
