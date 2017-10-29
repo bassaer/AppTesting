@@ -5,8 +5,8 @@ package com.github.bassaer.apptesting;
  */
 
 public class Item {
-    private int mIcon;
-    private String mText;
+    private int mIcon = 0;
+    private String mText = "";
 
     public Item() {
     }
