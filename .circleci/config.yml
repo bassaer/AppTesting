@@ -73,7 +73,7 @@ jobs:
           name: Update version
           command: |
               if [ $CIRCLE_BRANCH = "master" ]; then
-                sh ~/version.sh
+                sh ../version.sh
               else
                 echo "Version update was skipped."
               fi
