@@ -67,6 +67,15 @@ jobs:
           name: Run UI test
           command: ./gradlew lib:connectedAndroidTest
 
+      - run:
+          name: Update version
+          command: |
+            if [ $CIRCLE_BRANCH = "master" ]; then
+              sh ~/version.sh
+            else
+              echo "Version update was skipped."
+            fi
+
       - store_test_results:
           path: lib/build/test-results
 
