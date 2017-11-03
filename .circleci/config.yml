@@ -65,16 +65,19 @@ jobs:
 
       - run:
           name: Run UI test
-          command: ./gradlew lib:connectedAndroidTest
+          command: |
+              adb shell input keyevent 82
+              adb shell input keyevent 3
+              ./gradlew lib:connectedAndroidTest
 
       - run:
           name: Update version
           command: |
-            if [ $CIRCLE_BRANCH = "master" ]; then
-              sh ~/version.sh
-            else
-              echo "Version update was skipped."
-            fi
+              if [ $CIRCLE_BRANCH = "master" ]; then
+                sh ~/version.sh
+              else
+                echo "Version update was skipped."
+              fi
 
       - store_test_results:
           path: lib/build/test-results
