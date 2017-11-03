@@ -61,14 +61,13 @@ jobs:
 
       - run:
           name: Wait emulator
-          command: circle-android wait-for-boot
+          command: |
+              circle-android wait-for-boot
+              adb shell input keyevent 82
 
       - run:
           name: Run UI test
-          command: |
-              adb shell input keyevent 82
-              adb shell input keyevent 3
-              ./gradlew lib:connectedAndroidTest
+          command: ./gradlew lib:connectedAndroidTest
 
       - run:
           name: Update version
