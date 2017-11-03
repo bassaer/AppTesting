@@ -52,7 +52,7 @@ jobs:
 
       - run:
           name: Setup Emulator
-          command: sdkmanager "system-images;android-25;google_apis;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-25;google_apis;armeabi-v7a"
+          command: sdkmanager "system-images;android-24;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-24;default;armeabi-v7a"
 
       - run:
           name: Launch Emulator
@@ -61,14 +61,22 @@ jobs:
 
       - run:
           name: Wait emulator
-          command: circle-android wait-for-boot
+          command: |
+              circle-android wait-for-boot
+              adb shell input keyevent 82
 
       - run:
           name: Run UI test
+          command: ./gradlew lib:connectedAndroidTest
+
+      - run:
+          name: Update version
           command: |
-              # unlock screen
-              adb shell input keyevent 82
-              ./gradlew connectedAndroidTest
+              if [ $CIRCLE_BRANCH = "master" ]; then
+                sh ~/version.sh
+              else
+                echo "Version update was skipped."
+              fi
 
       - store_test_results:
           path: lib/build/test-results
