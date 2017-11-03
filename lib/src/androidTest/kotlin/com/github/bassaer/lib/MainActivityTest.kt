@@ -25,13 +25,12 @@ class MainActivityTest {
 
     @Before
     fun setUp() {
-        val activity = activityTestRule.activity;
-        activity.runOnUiThread {
+        val activity = activityTestRule.activity
+        activity.runOnUiThread({
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
                     WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-            )
-        }
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        })
     }
 
     @Test
