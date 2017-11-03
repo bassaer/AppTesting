@@ -65,7 +65,10 @@ jobs:
 
       - run:
           name: Run UI test
-          command: ./gradlew connectedAndroidTest
+          command: |
+              # unlock screen
+              adb shell input keyevent 82
+              ./gradlew connectedAndroidTest
 
       - store_test_results:
           path: lib/build/test-results
