@@ -16,3 +16,4 @@ git tag -a $VERSION -m "version $VERSION"
 
 git push origin master
 
+git push origin --tags
